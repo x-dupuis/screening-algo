@@ -7,7 +7,7 @@ from timeit import default_timer as timer
 from datetime import timedelta
 from time import strftime
 
-from PDHG import PDHG
+from modules.PDHG import PDHG
 
 class PAP(PDHG):
 

@@ -7,7 +7,7 @@ from timeit import default_timer as timer
 from datetime import timedelta
 from time import strftime
 
-from utils import drawArrow
+from modules.utils import drawArrow
 
 class PDHG:
         
