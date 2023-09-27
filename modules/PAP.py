@@ -10,7 +10,7 @@ from time import strftime
 from modules.solver import PDHG
 
 class PAP(PDHG):
-
+    """Create a model for 2D monopolist."""
     def __init__(self, theta, f, param):
         super().__init__(f)
         self.id = f'PAP_N{self.N}_'+strftime('%Y-%m-%d_%H-%M-%S')

@@ -10,7 +10,14 @@ from time import strftime
 from modules.utils import drawArrow
 
 class PDHG:
-        
+    """
+    The parent class.
+     
+    Contains: 
+        - the projection and the support function of the polyhedron K
+        - the Primal-Dual Hybrid Gradient algorithm (PDHG, a.k.a. Chambolle-Pock)
+        - general plotting functions
+    """
     def __init__(self, mu):
         self.mu = mu; self.N = mu.shape[-1]
         self.D_global = sparse.vstack([-sparse.eye(self.N, dtype=np.float32) 

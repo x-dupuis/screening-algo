@@ -10,7 +10,7 @@ from time import strftime
 from modules.solver import PDHG
 
 class TAX(PDHG):
-
+    """Create a model for 2D taxation."""
     def __init__(self, theta, f, param):
         super().__init__(param['lambd']*f)
         self.id = f'TAX_N{self.N}_'+strftime('%Y-%m-%d_%H-%M-%S')
