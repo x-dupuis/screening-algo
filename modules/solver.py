@@ -15,7 +15,7 @@ class PDHG:
      
     Contains: 
         - the projection and the support function of the polyhedron K
-        - the Primal-Dual Hybrid Gradient algorithm (PDHG, a.k.a. Chambolle-Pock)
+        - the Primal-Dual Hybrid Gradient algorithm (PDHG, a.k.a Chambolle-Pock)
         - general plotting functions
     """
     def __init__(self, mu):
