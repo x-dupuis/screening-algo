@@ -14,7 +14,7 @@ from modules.TAX import TAX
 ### SETTING
 
 ## Types setting
-n0, n1 = 3, 3
+n0, n1 = 10, 10
 theta0, theta1 =  np.linspace(1,3,num=n0), np.linspace(0,1,num=n1)  #  [1, 1.5, 3], [0, 0.5, 1]
 theta0, theta1 = np.meshgrid(theta0,theta1)
 theta = np.stack((theta0.flatten(), theta1.flatten())); N = theta.shape[-1]     # number of types
