@@ -7,6 +7,6 @@ The `modules` folder contains the code itself with two models:
 - `PAP` for 2D monopolist problems;
 - `TAX` for 2D taxation problems.
   
-The `examples` folder contains Python scripts and Jupyter notebooks which shows how to set and solve both models.
+The `examples` folder contains Python scripts and Jupyter notebooks which show how to set and solve both models.
 
 The `environment.yml` file provides a minimal conda environment required to run the code.
