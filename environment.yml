@@ -1,0 +1,11 @@
+name: screening
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - scipy
+  - openpyxl
+  - jupyterlab
+  - pandas
+  - matplotlib
+prefix: /Users/xdupuis/miniconda3/envs/screening
