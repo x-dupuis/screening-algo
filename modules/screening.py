@@ -9,9 +9,9 @@ from time import strftime
 
 from modules.utils import drawArrow
 
-class PDHG:
+class Screening:
     """
-    The parent class.
+    The base class.
      
     Contains: 
         - the projection and the support function of the polyhedron K

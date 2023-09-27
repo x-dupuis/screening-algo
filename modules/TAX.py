@@ -7,9 +7,9 @@ from timeit import default_timer as timer
 from datetime import timedelta
 from time import strftime
 
-from modules.solver import PDHG
+from modules.screening import Screening
 
-class TAX(PDHG):
+class TAX(Screening):
     """Create a model for 2D taxation."""
     def __init__(self, theta, f, param):
         super().__init__(param['lambd']*f)
