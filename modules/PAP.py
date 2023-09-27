@@ -23,7 +23,7 @@ class PAP(PDHG):
         self.v0 = np.zeros(self.N**2, dtype=np.float32)
         self.y0 = self.argmax_y_lagrangian(self.v0)
         self.lamb0 = np.zeros(self.N, dtype=np.float32)
-        print(f'model id = {self.id}')
+        print(f'model id = {self.id}\n')
 
     def all(self):
         _, s, _ = sparse.linalg.svds(self.Lambda, k=1, solver="arpack")

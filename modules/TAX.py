@@ -26,7 +26,7 @@ class TAX(PDHG):
         self.y0 = np.concatenate((self.theta[0],np.ones(self.N)))
         self.v0 = np.zeros(self.N**2, dtype=np.float32)
         self.lamb0 = np.zeros(self.N, dtype=np.float32)
-        print(f'model id = {self.id}')
+        print(f'model id = {self.id}\n')
 
     def all(self, seed=None, under_estim=False):
         rng = np.random.default_rng(seed)
