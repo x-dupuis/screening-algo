@@ -108,11 +108,11 @@ class TAX(Screening):
                 df_param.to_excel(writer, sheet_name='parameters')
 
     
-    def display(self, variable, title=None, label=None, path=None, s=20, figsize=(5,5),**kwargs):
+    def display(self, variable, title=None, label=None, path=None, s=20, figsize=(5,5), cmap=None, **kwargs):
         self.fig, ax = plt.subplots(1,1 ,figsize=figsize, subplot_kw=kwargs) #subplot_kw=dict(aspect='equal',)
         _ = ax.set_xlabel(r'initial endowment $e$'); _ = ax.set_ylabel(r'disutility of working $x$')
         _ = ax.set_title(title)
-        scatter = ax.scatter(self.theta[0], self.theta[1], c=variable)
+        scatter = ax.scatter(self.theta[0], self.theta[1], c=variable, cmap=cmap)
         _ = self.fig.colorbar(scatter, label=label)
 
         if path is not None:
