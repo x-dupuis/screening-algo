@@ -2,7 +2,7 @@
 
 This repository provides code to solve quasi-linear screening problems by a Primal-Dual Hybrid Gradient algorithm (PDHG, a.k.a Chambolle-Pock) and to reproduce the numerical illustrations of the paper *A General Solution to the Quasi Linear Screening Problem* by G. Carlier, X. Dupuis, J.-C. Rochet, and J. Thanassoulis.
 
-The `modules` folder contains the code itself with
+The `modules` folder contains the code itself with:
 
 - a base class `Screening`
   
