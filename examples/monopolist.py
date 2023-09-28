@@ -7,9 +7,9 @@ from timeit import default_timer as timer
 from datetime import timedelta
 import sys
 sys.path.append('..')
-from modules.PAP import PAP
+from modules import PAP
 
-#############
+############# MULTIPRODUCT MONOPOLIST ############
 
 ### SETTING 1
 

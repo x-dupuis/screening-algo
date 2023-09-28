@@ -7,9 +7,9 @@ from timeit import default_timer as timer
 from datetime import timedelta
 import sys
 sys.path.append('..')
-from modules.TAX import TAX
+from modules import TAX
 
-#############
+############# JOINT TAXATION OF SAVING AND LABOR INCOMES ###############
 
 ### SETTING
 
