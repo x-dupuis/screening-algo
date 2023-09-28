@@ -30,7 +30,7 @@ model = TAX(theta, f, param)
 ### DIRECT RESOLUTION (with all the constraints)
 
 model.all(seed=1, under_estim=True)
-model.solve(linear=False, stepratio=sqrt(N), it_max=1e5, path='results/'+model.id)
+model.solve(linear=False, stepratio=sqrt(N), it_max=1e5,) #path='results/'+model.id)
 model.residuals(title='residuals')
 # # model.constraints(path='results/'+model.id+'_constraints')
 
