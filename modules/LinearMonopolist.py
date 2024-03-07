@@ -11,11 +11,11 @@ from modules.screening import Screening
 
 class LinearMonopolist(Screening):
     """Create a model for 2D linear monopolist (with indivisible goods)."""
-    def __init__(self, theta, f):
+    def __init__(self, theta, f, param):
         super().__init__(f)
         self.id = f'LinearMonopolist_N{self.N}_'+strftime('%Y-%m-%d_%H-%M-%S')
         self.theta = theta; self.f = f
-        # self.param = param; self.constrained = param['constrained'] if 'constrained' in param.keys() else False
+        self.param = param; self.substituable = param['substituable'] if 'substituable' in param.keys() else False
         self.Lambda_global = sparse.hstack((sparse.vstack([sparse.diags(theta[0,i]-theta[0,:],0, dtype=np.float32) for i in range(self.N)]),
                                      sparse.vstack([sparse.diags(theta[1,i]-theta[1,:],0, dtype=np.float32) for i in range(self.N)])),
                                      format='csr')
@@ -69,7 +69,16 @@ class LinearMonopolist(Screening):
         return np.tile(self.f,2)*self.theta.flatten()
 
     def prox_minusS(self, y, tau):
-        return np.clip(y + tau*np.tile(self.f,2)*self.theta.flatten(), 0, 1)
+        if self.substituable==False:
+            return np.clip(y + tau*np.tile(self.f,2)*self.theta.flatten(), 0, 1)
+        else:
+            z = np.clip(y + tau*np.tile(self.f,2)*self.theta.flatten(), 0, None)
+            simplex_violated = np.tile(np.eye(self.N), 2)@ z > 1
+            if np.any(simplex_violated):
+                z0 = np.clip(1/2*(y[:self.N] - y[self.N:] + 1 + tau*(self.theta[0] -self.theta[1])), 0, 1)
+                z[np.tile(simplex_violated, 2)] = np.concatenate((z0[simplex_violated], 1-z0[simplex_violated]))
+            return z
+
 
     def argmax_y_lagrangian(self, v):
         return np.heaviside(np.tile(self.f,2)*self.theta.flatten() - self.Lambda.T@v, 0.5)
@@ -77,5 +86,5 @@ class LinearMonopolist(Screening):
     def nlLambda(self, y): # to use nonlinear PDHG
         return self.Lambda @ y
     
-    def JLambda(self, y): # to use nonlinear lPDHG
+    def JLambda(self, y): # to use nonlinear PDHG
         return self.Lambda
