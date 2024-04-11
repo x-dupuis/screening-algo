@@ -79,3 +79,35 @@ class PAP(Screening):
     
     def JLambda(self, y): # to use nonlinear lPDHG
         return self.Lambda
+    
+    def output(self, path=None):
+        self.p = self.theta[0] * self.y[:self.N] + self.theta[1] * self.y[self.N:] - self.U 
+
+        self.df_output = pd.DataFrame({'theta1': self.theta[0],
+                                       'theta2': self.theta[1],
+                                       'f': self.f,
+                                       'y1': self.y[:self.N],
+                                       'y2': self.y[self.N:],
+                                       'U': self.U,
+                                       'p': self.p,})
+        with pd.option_context(#'display.max_rows', None,
+                       'display.max_columns', None,
+                       'display.precision', 3,):
+            print(self.df_output)
+        
+        if path is not None:
+            df_param = pd.DataFrame.from_dict(self.param.items())
+            with pd.ExcelWriter(path+'.xlsx') as writer:  
+                self.df_output.round(3).to_excel(writer, sheet_name='output')
+                df_param.to_excel(writer, sheet_name='parameters')
+
+    
+    def display(self, variable, title=None, label=None, path=None, s=20, figsize=(5,5), cmap=None, **kwargs):
+        self.fig, ax = plt.subplots(1,1 ,figsize=figsize, subplot_kw=kwargs) #subplot_kw=dict(aspect='equal',)
+        _ = ax.set_xlabel(r'$\theta_1$'); _ = ax.set_ylabel(r'$\theta_2$')
+        _ = ax.set_title(title)
+        scatter = ax.scatter(self.theta[0], self.theta[1], c=variable, cmap=cmap)
+        _ = self.fig.colorbar(scatter, label=label)
+
+        if path is not None:
+            self.fig.savefig(path, bbox_inches="tight", pad_inches=0.05)

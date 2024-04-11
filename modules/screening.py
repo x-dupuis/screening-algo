@@ -154,7 +154,7 @@ class Screening:
 
         # model update
         self.y = y; self.v = v; self.lamb = lamb; self.v_aug = v_aug; self.U = U
-        self.it = it; self.elapsed = elapsed
+        self.it = it; self.elapsed = elapsed; self.converged = criteria.all()
         self.rec_primal_residual = np.array(rec_primal_residual); self.rec_dual_residual = np.array(rec_dual_residual); self.rec_it_proj = np.array(rec_it_proj)
         self.IR_binding = np.flatnonzero((self.D.T@v - self.mu) < -(self.rtol_proj*self.mu + self.atol_proj))
         self.IC_binding = np.argwhere(v_aug.reshape(self.N, self.N))
