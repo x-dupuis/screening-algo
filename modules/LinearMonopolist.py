@@ -55,7 +55,7 @@ class LinearMonopolist(Screening):
             super().super_local()
         
         self.Lambda = self.Lambda_global[self.indices]
-        _, s, _ = sparse.linalg.svds(self.Lambda, k=1, solver="arpack")
+        _, s, _ = sparse.linalg.svds(self.Lambda, k=1, ncv=3, solver="arpack")
         self.norm_Lambda = s[0]
 
     def ind_local(self, k):
