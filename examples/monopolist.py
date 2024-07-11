@@ -43,6 +43,45 @@ plt.show()
 ### SETTING 2
 
 ## Types setting
+
+## Random types
+# N = 10
+# rng = np.random.default_rng()
+# mu = 1.5; sigma2 = 1; rho = 0
+# theta = rng.multivariate_normal(mu*np.array([1, 1]),sigma2*np.array([[1, rho], [rho,1]]),N).T
+
+n0, n1 = 5, 5
+theta0, theta1 =  np.linspace(1,2,num=n0, dtype=np.float32), np.linspace(1,2,num=n1, dtype=np.float32)  #  [1, 1.5, 3], [0, 0.5, 1]
+theta0, theta1 = np.meshgrid(theta0,theta1)
+theta = np.stack((theta0.flatten(), theta1.flatten())); N = theta.shape[-1]     # number of types
+## random perturbation
+rng = np.random.default_rng(2024)
+theta = theta + rng.normal(0, 0.05, (2,N)) 
+
+f = np.ones(N, dtype=np.float32).flatten()    # weights of the distribution
+
+## Model parameters setting
+param = {'constrained':False}   # boolean for the constraint y >= 0
+
+## Objects
+model = PAP(theta, f, param)
+
+### DIRECT RESOLUTION (with all the constraints)
+
+model.all()
+model.solve(stepratio=N/2, it_max=1e4, tol_primal=1e-6, tol_dual=1e-6, scale=True,) #path='results/'+model.id
+model.residuals(title='residuals')
+model.range(title='Product range',) # path='results/'+model.id+'_products')
+model.constraints() #path='results/'+model.id+'_constraints')
+
+print('\n')
+plt.show()
+
+#############
+
+### SETTING 3
+
+## Types setting
 n0, n1 = 20, 20
 theta0, theta1 =  np.linspace(1,2,num=n0, dtype=np.float32), np.linspace(1,2,num=n1, dtype=np.float32)  #  [1, 1.5, 3], [0, 0.5, 1]
 theta0, theta1 = np.meshgrid(theta0,theta1)
