@@ -174,20 +174,20 @@ class Screening:
             self.fig.savefig(path, bbox_inches="tight", pad_inches=0.05)
 
 
-    def range(self, figsize=(5,5), s=20, title=None, path=None, **kwargs): # use aspect='equal'
+    def range(self, figsize=(5,5),  title=None, path=None, **kwargs): # use aspect='equal'
         self.fig, ax = plt.subplots(1,1 ,figsize=figsize, subplot_kw=kwargs) # subplot_kw=dict(aspect='equal',) 
-        _ = ax.scatter(self.y[:self.N], self.y[self.N:],color='tab:blue', s=s,label='products')
+        _ = ax.scatter(self.y[:self.N], self.y[self.N:],color='tab:blue',label='products')
         _ = ax.set_xlabel(r'$y_1$'); _ = ax.set_ylabel(r'$y_2$')
         _ = ax.set_title(title)
         if path is not None:
             self.fig.savefig(path, bbox_inches="tight", pad_inches=0.05)
 
-    def constraints(self, figsize=(5,5), s=20, title=None, path=None, **kwargs): # use aspect='equal'
+    def constraints(self, figsize=(5,5), title=None, path=None, **kwargs): # use aspect='equal'
         IC = 'IC' if title else 'IC binding'; IR = 'IR' if title else 'IR binding'
         self.fig, ax = plt.subplots(1,1 ,figsize=figsize, subplot_kw=kwargs) # subplot_kw=dict(aspect='equal',) 
-        _ = ax.scatter(self.theta[0],self.theta[1],facecolors='w',edgecolors='k',s=s, zorder=2.5)
+        _ = ax.scatter(self.theta[0],self.theta[1],facecolors='w',edgecolors='k', zorder=2.5)
         _ = ax.scatter([],[], marker='>', c='k', label=IC)
-        _ = ax.scatter(self.theta[0][self.IR_binding],self.theta[1][self.IR_binding],label=IR,c='tab:green',s=s,zorder=2.5)
+        _ = ax.scatter(self.theta[0][self.IR_binding],self.theta[1][self.IR_binding],label=IR,c='tab:green',zorder=2.5)
         for i,j in self.IC_binding:
             _ = drawArrow(ax,self.theta[0,i],self.theta[0,j],self.theta[1,i],self.theta[1,j])
         _ = ax.set_xlabel(r'$\theta_1$'); _ = ax.set_ylabel(r'$\theta_2$')
